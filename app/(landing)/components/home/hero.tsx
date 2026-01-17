@@ -30,7 +30,7 @@ const Hero = () => {
             <Button className="gap-2">
               Explore More <FiFastForward />{" "}
             </Button>
-            <Button variant="ghost" className="gap-4.25">
+            <Button variant="ghost" className="gap-4.25 ">
               Watch Video{" "}
               <Image
                 src="/images/icon-play-video.svg"
