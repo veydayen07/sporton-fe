@@ -23,9 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="overflow-x-hidden">
-      <body className={`${poppins.variable} antialiased`}>
+      <body
+        className={`${poppins.variable} antialiased min-h-screen flex flex-col`}
+      >
         <HeaderLayout />
-        {children}
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

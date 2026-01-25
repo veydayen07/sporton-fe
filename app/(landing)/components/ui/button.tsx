@@ -8,13 +8,14 @@ type TButtonProps = {
   className?: string;
   variant?: "primary" | "dark" | "ghost";
   size?: "normal" | "small";
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
   children,
   className,
   variant = "primary",
   size = "normal",
+  ...props
 }: TButtonProps) => {
   const baseStyle =
     "inline-flex gap-2 duration-300 justify-center items-center cursor-pointer hover:scale-105";
@@ -32,6 +33,7 @@ const Button = ({
   return (
     <button
       className={`${baseStyle} ${variants[variant]} ${sizes[size]} ${className}`}
+      {...props}
     >
       {children}
     </button>

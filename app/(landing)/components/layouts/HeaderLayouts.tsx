@@ -9,13 +9,17 @@ const headerLayout = () => {
   return (
     <header className="">
       <div className="flex container mx-auto py-7 justify-between">
-        <Image
-          src={"/images/logo.svg"}
-          alt="logo"
-          width={127}
-          height={29.74}
-          className=""
-        />
+        <Link href={"/"}>
+          {" "}
+          <Image
+            src={"/images/logo.svg"}
+            alt="logo"
+            width={127}
+            height={29.74}
+            className=""
+          />
+        </Link>
+
         <nav className="flex gap-22.75 font-medium items-center text-base">
           <Link
             href="#"

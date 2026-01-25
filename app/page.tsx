@@ -4,10 +4,10 @@ import Products from "./(landing)/components/home/products";
 
 export default function Home() {
   return (
-    <main>
+    <div>
       <Hero />
       <Categories />
       <Products />
-    </main>
+    </div>
   );
 }
