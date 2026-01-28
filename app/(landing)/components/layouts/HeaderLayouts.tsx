@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
+import CartPopUp from "../ui/CartPopUp";
 
-const headerLayout = () => {
+const HeaderLayout = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
     <header className="">
       <div className="flex container mx-auto py-7 justify-between">
@@ -32,16 +34,20 @@ const headerLayout = () => {
         </nav>
         <div className="flex gap-10">
           <FiSearch size={24} strokeWidth={2} />
-          <div className="relative">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setIsCartOpen(!isCartOpen)}
+          >
             <FiShoppingBag size={24} strokeWidth={2} />
             <div className="absolute w-3.25 h-3.25 font-medium text-[9px] rounded-full bg-primary flex justify-center items-center text-white -top-1 -right-1.25">
               3
             </div>
           </div>
+          {isCartOpen && <CartPopUp />}
         </div>
       </div>
     </header>
   );
 };
 
-export default headerLayout;
+export default HeaderLayout;
