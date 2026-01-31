@@ -4,10 +4,12 @@ import { FiArrowRight, FiTrash2 } from "react-icons/fi";
 import Image from "next/image";
 import { priceFormatter } from "@/app/utils/price-formatter";
 import Button from "./button";
+import { useRouter } from "next/navigation";
 
 const CartPopUp = () => {
+  const { push } = useRouter();
   return (
-    <div className="w-90 absolute right-0 top-16 border border-[#E4E4E4] z-10 shadow-lg flex flex-col bg-white py-4">
+    <div className="w-90 absolute right-18 top-18 border border-[#E4E4E4] z-10 shadow-lg flex flex-col bg-white py-4">
       <span className="w-full text-center text-base font-bold pb-2.5 border-b border-[#E4E4E4D1]/82">
         Shopping Cart
       </span>
@@ -43,7 +45,7 @@ const CartPopUp = () => {
           </div>
         ))}
       </div>
-      <div className="pt-2.75 px-4 flex justify-between  items-center mb-3.75">
+      <div className="pt-2.75 px-4 flex justify-between items-center mb-3.75">
         <span className="font-semibold text-sm">Total</span>
         <span className="font-semibold text-xs text-primary">
           {priceFormatter(
@@ -52,7 +54,12 @@ const CartPopUp = () => {
         </span>
       </div>
       <div className="px-4">
-        <Button variant="dark" size="small" className="flex gap-2.75 w-full">
+        <Button
+          variant="dark"
+          size="small"
+          className="flex gap-2.75 w-full"
+          onClick={() => push("/checkout")}
+        >
           Checkout Now
           <FiArrowRight />
         </Button>
