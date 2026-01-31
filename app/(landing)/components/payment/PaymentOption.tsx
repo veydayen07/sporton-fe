@@ -28,7 +28,7 @@ const paymentList: TPayment[] = [
 const PaymentOption = ({ className }: TPaymentOption) => {
   return (
     <div className={`${className}`}>
-      <CardWithHeader header="Payment Option">
+      <CardWithHeader header="Payment Option" className="h-full">
         <div className="border border-gray-100 ">
           {paymentList.map((payment, index) => (
             <div
