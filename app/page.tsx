@@ -4,7 +4,7 @@ import Products from "./(landing)/components/home/products";
 
 export default function Home() {
   return (
-    <div>
+    <div className="py-20">
       <Hero />
       <Categories />
       <Products />

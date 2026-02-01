@@ -1,15 +1,19 @@
+"use client";
+
 import React from "react";
 import CardWithHeader from "./../ui/cardWithHeader";
 import FileUploads from "../ui/FileUploads";
 import { priceFormatter } from "@/app/utils/price-formatter";
 import Button from "../ui/button";
 import { FiCheckCircle } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 type TPaymentStep = {
   className?: string;
 };
 
 const PaymentStep = ({ className }: TPaymentStep) => {
+  const { push } = useRouter();
   return (
     <div className={`${className}`}>
       <CardWithHeader header="Payment Step">
@@ -49,6 +53,7 @@ const PaymentStep = ({ className }: TPaymentStep) => {
             <Button
               className="text-base font-medium flex items-center gap-3 w-full"
               variant="dark"
+              onClick={() => push("/order-status/12222")}
             >
               <FiCheckCircle size={20} strokeWidth={2} /> Upload Receipt &
               Confirm

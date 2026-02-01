@@ -5,7 +5,7 @@ import ProductActions from "./../../product-detail/ProductActions";
 
 const ProductDetail = () => {
   return (
-    <div className="container mx-auto py-40 flex gap-12">
+    <div className="container mx-auto flex gap-12 py-20">
       <div className="bg-primary-light aspect-square min-w-140 flex justify-center items-center">
         <Image
           src={"/images/products/product-4.png"}
