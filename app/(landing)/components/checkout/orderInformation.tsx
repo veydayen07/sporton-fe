@@ -5,7 +5,7 @@ import InputGroup from "./../ui/inputGroup";
 const OrderInformation = () => {
   return (
     <CardWithHeader header="Order Information">
-      <div className="flex flex-col gap-5 px-6.25 pb-13">
+      <div className="flex flex-col gap-5 px-6.25 pb-13 pt-4">
         <InputGroup
           label="Full Name"
           type="text"
