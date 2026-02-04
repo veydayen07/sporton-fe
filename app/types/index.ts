@@ -1,0 +1,48 @@
+interface Category {
+  _id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  category: Category;
+  stock: number;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Bank {
+  _id: string;
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Transaction {
+  _id: string;
+  paymentProof: string;
+  status: string;
+  purchasedItems: PurchasedItems[];
+  totalPayment: string;
+  customerName: string;
+  customerContact?: number;
+  customerAddress: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface PurchasedItems {
+  productId: string;
+  qty: string;
+}
+
+export type { Category, Product, Bank, Transaction };

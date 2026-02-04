@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiImage, FiTrash2, FiUploadCloud } from "react-icons/fi";
 
 type TFileUploads = {

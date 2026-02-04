@@ -1,5 +1,4 @@
 import React from "react";
-import CardWithHeader from "../components/ui/cardWithHeader";
 import PaymentOption from "../components/payment/PaymentOption";
 import PaymentStep from "../components/payment/PaymentStep";
 

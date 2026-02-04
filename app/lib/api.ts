@@ -5,8 +5,17 @@ export async function fetchAPI<T>(
 ): Promise<T> {
   const res = await fetch(`${API_URL}/${endpoint}`, {
     ...options,
-    headers: { "content-type": "application/json" },
-    body: {},
+    cache: options?.cache || "no-store",
   });
+  if (!res.ok) {
+    let errorMessage = `Failed to fetch data from ${endpoint}`;
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.message || errorData.error || errorMessage;
+    } catch (error) {
+      console.error(error);
+    }
+    throw new Error(errorMessage);
+  }
   return res.json();
 }

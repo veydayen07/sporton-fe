@@ -1,3 +1,4 @@
+import { getAllCategories } from "@/app/services/category.service";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -35,7 +36,9 @@ const categoryList: TCategoryList[] = [
   },
 ];
 
-const Categories = () => {
+const Categories = async () => {
+  const responseCategories = await getAllCategories();
+  console.log(responseCategories);
   return (
     <section className="container mx-auto pb-20 flex flex-col gap-6">
       <div className="flex justify-between">
