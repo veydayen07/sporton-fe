@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/app/lib/api";
 import { getAllCategories } from "@/app/services/category.service";
 import { Category } from "@/app/types";
 import Image from "next/image";
@@ -59,7 +60,7 @@ const Categories = ({ categories }: { categories: Category[] }) => {
             className={`aspect-square ${categories.length < 6 ? "w-1/6" : "w-full"} flex flex-col gap-2.5 justify-center items-center rounded-xl bg-linear-to-r from-[#F1F1F1] to-[#F7F7F7] text-primary `}
           >
             <Image
-              src={`${process.env.NEXT_BASE_API_URL}${category.imageUrl}`}
+              src={`${BASE_API_URL}${category.imageUrl}`}
               alt={category.name}
               width={86}
               height={86}
