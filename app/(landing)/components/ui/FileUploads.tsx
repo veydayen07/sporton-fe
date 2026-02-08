@@ -10,20 +10,6 @@ type TFileUploads = {
 const FileUploads = ({ OnFileSelect }: TFileUploads) => {
   const [file, setFile] = useState<File | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  // useEffect(() => {
-  //   console.log(fileInputRef.current?.files);
-  // }, [fileInputRef]);
-
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   // const files = e.target.files;
-  //   // if (!files || files.length === 0) {
-  //   //   console.log("No file selected");
-  //   //   return;
-  //   // }
-
-  //   // console.log(files[0]);
-
-  // };
 
   const handleFileChange = (selectedFile?: File) => {
     if (!selectedFile) return;

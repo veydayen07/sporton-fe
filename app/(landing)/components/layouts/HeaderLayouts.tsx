@@ -9,7 +9,7 @@ import CartPopUp from "../ui/CartPopUp";
 const HeaderLayout = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   return (
-    <header className="">
+    <header className="fixed backdrop-blur-xl w-full z-50">
       <div className="flex container mx-auto py-7 justify-between">
         <Link href={"/"}>
           {" "}

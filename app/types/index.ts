@@ -46,4 +46,14 @@ interface PurchasedItems {
   qty: string;
 }
 
-export type { Category, Product, Bank, Transaction };
+interface CartItem extends Product {
+  qty: number;
+}
+
+interface CustomerInfo {
+  customerName: string;
+  customerContact: number | null;
+  customerAddress: string;
+}
+
+export type { Category, Product, Bank, Transaction, CartItem, CustomerInfo };
