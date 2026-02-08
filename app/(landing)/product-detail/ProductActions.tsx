@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 
-const ProductActions = () => {
+const ProductActions = ({ stock }: { stock: number }) => {
   const { push } = useRouter();
   const [qty, setQty] = useState<number>(1);
   return (
@@ -21,7 +21,7 @@ const ProductActions = () => {
         <div className="flex flex-col flex-1">
           <button
             className="border-b border-[#A0A0A0] flex justify-center items-center aspect-square cursor-pointer"
-            onClick={() => setQty(qty + 1)}
+            onClick={() => setQty(qty < stock ? qty + 1 : stock)}
           >
             <FiChevronUp />
           </button>

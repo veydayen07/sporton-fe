@@ -14,6 +14,7 @@ interface Product {
   category: Category;
   stock: number;
   price: number;
+  imageUrl: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -30,7 +31,7 @@ interface Bank {
 interface Transaction {
   _id: string;
   paymentProof: string;
-  status: string;
+  status: "pending" | "paid" | "rejected";
   purchasedItems: PurchasedItems[];
   totalPayment: string;
   customerName: string;
