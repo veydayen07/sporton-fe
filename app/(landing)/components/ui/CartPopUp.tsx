@@ -1,51 +1,66 @@
 import React from "react";
-import { cartList } from "../../data/cartItems";
+// import { cartList } from "../../data/cartItems";
 import { FiArrowRight, FiTrash2 } from "react-icons/fi";
 import Image from "next/image";
 import { priceFormatter } from "@/app/utils/price-formatter";
 import Button from "./button";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/hooks/useCartHooks";
+import { BASE_API_URL } from "@/app/lib/api";
 
 const CartPopUp = () => {
   const { push } = useRouter();
+  const { items: cartList, removeItem } = useCartStore();
+  console.log(cartList);
   return (
     <div className="w-90 absolute right-18 top-18 border border-[#E4E4E4] z-10 shadow-lg flex flex-col bg-white py-4">
       <span className="w-full text-center text-base font-bold pb-2.5 border-b border-[#E4E4E4D1]/82">
         Shopping Cart
       </span>
       <div className="flex flex-col justify-center">
-        {cartList.map((item, index) => (
-          <div
-            key={index}
-            className="pl-4 pr-5 py-4 border-b border-[#E4E4E4] flex justify-between items-center"
-          >
-            <div className="flex gap-2.75">
-              <div className="aspect-square bg-primary-light p-0.5  flex items-center">
-                <Image
-                  width={63}
-                  height={63}
-                  alt={item.name}
-                  src={`/images/products/${item.imgUrl}`}
-                  className="object-contain aspect-square"
-                />
-              </div>
-              <div className="flex flex-col gap-px justify-center">
-                <span className="font-medium text-sm">{item.name}</span>
-                <div className="flex gap-1.5">
-                  <span className="font-medium text-xs">{item.qty}X</span>
-                  <span className="text-primary font-medium text-xs">
-                    {priceFormatter(item.price)}
-                  </span>
+        {cartList.length > 0 ? (
+          cartList.map((item, index) => (
+            <div
+              key={index}
+              className="pl-4 pr-5 py-4 border-b border-[#E4E4E4] flex justify-between items-center"
+            >
+              <div className="flex gap-2.75">
+                <div className="aspect-square bg-primary-light p-0.5  flex items-center">
+                  <Image
+                    width={63}
+                    height={63}
+                    alt={item.name}
+                    src={`${BASE_API_URL}${item.imageUrl}`}
+                    className="object-contain aspect-square"
+                  />
+                </div>
+                <div className="flex flex-col gap-px justify-center">
+                  <span className="font-medium text-sm">{item.name}</span>
+                  <div className="flex gap-1.5">
+                    <span className="font-medium text-xs">{item.qty}X</span>
+                    <span className="text-primary font-medium text-xs">
+                      {priceFormatter(item.price)}
+                    </span>
+                  </div>
                 </div>
               </div>
+              <Button
+                size="small"
+                variant="ghost"
+                className="w-5 h-5 p-0! flex items-center "
+                onClick={() => removeItem(item._id)}
+              >
+                <FiTrash2 strokeWidth={1.5} className="text-black" />
+              </Button>
             </div>
-            <i className="w-5 h-5 flex items-center ">
-              <FiTrash2 strokeWidth={1.5} className="text-black" />
-            </i>
+          ))
+        ) : (
+          <div className="text-center opacity-50 py-5">
+            Your shopping cart is empty
           </div>
-        ))}
+        )}
       </div>
-      <div className="pt-2.75 px-4 flex justify-between items-center mb-3.75">
+      <div className="pt-2.75 px-4 flex justify-between items-center mb-3.75 border-t border-[#E4E4E4D1]/82">
         <span className="font-semibold text-sm">Total</span>
         <span className="font-semibold text-xs text-primary">
           {priceFormatter(
@@ -54,15 +69,17 @@ const CartPopUp = () => {
         </span>
       </div>
       <div className="px-4">
-        <Button
-          variant="dark"
-          size="small"
-          className="flex gap-2.75 w-full"
-          onClick={() => push("/checkout")}
-        >
-          Checkout Now
-          <FiArrowRight />
-        </Button>
+        {cartList.length > 0 && (
+          <Button
+            variant="dark"
+            size="small"
+            className="flex gap-2.75 w-full"
+            onClick={() => push("/checkout")}
+          >
+            Checkout Now
+            <FiArrowRight />
+          </Button>
+        )}
       </div>
     </div>
   );

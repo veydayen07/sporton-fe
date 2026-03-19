@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -5,6 +7,7 @@ import Button from "../ui/button";
 import { FiPlus } from "react-icons/fi";
 import { Product } from "@/app/types";
 import { BASE_API_URL } from "@/app/lib/api";
+import { useCartStore } from "@/app/hooks/useCartHooks";
 type TProductList = {
   name: string;
   imgUrl: string;
@@ -52,8 +55,13 @@ const productList: TProductList[] = [
 ];
 
 const Products = ({ products }: { products: Product[] }) => {
-  console.log(products);
-
+  const { addItem } = useCartStore();
+  const handleAdd = (e: React.MouseEvent, product: Product): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem(product, 1);
+  };
+  console.log(BASE_API_URL);
   return (
     <section className="container mx-auto mt-32">
       <h2 className="font-bold italic text-4xl text-center mb-11 ">
@@ -74,7 +82,11 @@ const Products = ({ products }: { products: Product[] }) => {
                 height={300}
                 className="aspect-square object-contain"
               />
-              <Button className="w-10 h-10 p-2! absolute right-3 top-3 ">
+
+              <Button
+                className="w-10 h-10 p-2! absolute right-3 top-3 "
+                onClick={(e) => handleAdd(e, product)}
+              >
                 <FiPlus size={24} />
               </Button>
             </div>

@@ -1,14 +1,17 @@
 "use client";
 import React from "react";
 import CardWithHeader from "../ui/cardWithHeader";
-import { cartList } from "../../data/cartItems";
+// import { cartList } from "../../data/cartItems";
 import Image from "next/image";
 import { priceFormatter } from "@/app/utils/price-formatter";
 import { FiCreditCard, FiTrash2 } from "react-icons/fi";
 import Button from "../ui/button";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/hooks/useCartHooks";
+import { BASE_API_URL } from "@/app/lib/api";
 
 const CartItems = () => {
+  const { items: cartList } = useCartStore();
   const { push } = useRouter();
   return (
     <CardWithHeader header="Cart Items">
@@ -24,7 +27,7 @@ const CartItems = () => {
                   width={63}
                   height={63}
                   alt={item.name}
-                  src={`/images/products/${item.imgUrl}`}
+                  src={`${BASE_API_URL}${item.imageUrl}`}
                   className="object-contain aspect-square"
                 />
               </div>

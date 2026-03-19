@@ -7,12 +7,18 @@ import { priceFormatter } from "@/app/utils/price-formatter";
 import Button from "../ui/button";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/hooks/useCartHooks";
 
 type TPaymentStep = {
   className?: string;
 };
 
 const PaymentStep = ({ className }: TPaymentStep) => {
+  const { items } = useCartStore();
+  const totalPrice = items.reduce(
+    (total, item) => total + item.qty * item.price,
+    0,
+  );
   const { push } = useRouter();
   return (
     <div className={`${className}`}>
@@ -46,7 +52,7 @@ const PaymentStep = ({ className }: TPaymentStep) => {
           <div className="flex justify-between font-semibold items-center px-4">
             <span className="text-sm ">Total</span>
             <span className="text-xs text-primary">
-              {priceFormatter(5000000)}
+              {priceFormatter(totalPrice)}
             </span>
           </div>
           <div className="px-4 w-full ">

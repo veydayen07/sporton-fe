@@ -8,8 +8,15 @@ import {
   FiShoppingBag,
 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { Product } from "@/app/types";
 
-const ProductActions = ({ stock }: { stock: number }) => {
+const ProductActions = ({
+  stock,
+  product,
+}: {
+  stock: number;
+  product: Product;
+}) => {
   const { push } = useRouter();
   const [qty, setQty] = useState<number>(1);
   return (

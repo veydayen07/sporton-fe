@@ -10,7 +10,7 @@ const ProductDetail = async ({ params }: { params: { id: string } }) => {
   const product = await getProductById(id);
   console.log(product);
   return (
-    <div className="container mx-auto flex gap-12 py-20" key={product._id}>
+    <div className="container mx-auto flex gap-12 py-40" key={product._id}>
       <div className="bg-primary-light aspect-square min-w-140 flex justify-center items-center">
         <Image
           src={`${BASE_API_URL}${product.imageUrl}`}
@@ -33,7 +33,7 @@ const ProductDetail = async ({ params }: { params: { id: string } }) => {
         <p className="text-primary text-4xl font-semibold leading-normal mb-12">
           {priceFormatter(product.price)}
         </p>
-        <ProductActions stock={product.stock} />
+        <ProductActions p stock={product.stock} />
       </div>
     </div>
   );

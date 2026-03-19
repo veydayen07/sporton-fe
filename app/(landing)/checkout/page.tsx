@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import CartItems from "./../components/checkout/cartItems";
 import OrderInformation from "./../components/checkout/orderInformation";
+import { useCartStore } from "@/app/hooks/useCartHooks";
+import { CustomerInfo } from "@/app/types";
+import { useRouter } from "next/router";
 
 const CheckoutPage = () => {
+  const { push } = useRouter();
+  const [showWarningToast, setShowWarningToast] = useState<boolean>(false);
+  const [formData, setFormData] = useState<CustomerInfo>({
+    customerAddress: "",
+    customerContact: null,
+    customerName: "",
+  });
+  const { customerInfo, setCustomerInfo } = useCartStore();
+  const handlePayment = () => {
+    if (
+      !formData.customerAddress ||
+      !formData.customerContact ||
+      !formData.customerName
+    ) {
+      setShowWarningToast(true);
+      return;
+    }
+
+    setCustomerInfo(formData);
+    push("/payment");
+  };
   return (
     <div className="bg-gray-100 min-h-[80vh] py-20">
       <div className="mx-auto w-full  max-w-5xl">
@@ -10,7 +34,7 @@ const CheckoutPage = () => {
           Checkout Now
         </h1>
         <div className="grid grid-cols-2 gap-15 ">
-          <OrderInformation />
+          <OrderInformation formData={formData} setFormData={setFormData} />
           <CartItems />
         </div>
       </div>
