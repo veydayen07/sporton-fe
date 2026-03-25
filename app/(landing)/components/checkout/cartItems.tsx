@@ -11,7 +11,7 @@ import { useCartStore } from "@/app/hooks/useCartHooks";
 import { BASE_API_URL } from "@/app/lib/api";
 
 const CartItems = () => {
-  const { items: cartList } = useCartStore();
+  const { items: cartList, removeItem } = useCartStore();
   const { push } = useRouter();
   return (
     <CardWithHeader header="Cart Items">
@@ -41,7 +41,10 @@ const CartItems = () => {
                 </div>
               </div>
             </div>
-            <i className="w-5 h-5 flex items-center ">
+            <i
+              className="w-5 h-5 flex items-center cursor-pointer"
+              onClick={() => removeItem(item._id)}
+            >
               <FiTrash2 strokeWidth={1.5} className="text-black" />
             </i>
           </div>

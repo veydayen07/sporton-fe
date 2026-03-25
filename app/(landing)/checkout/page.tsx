@@ -1,9 +1,10 @@
+"use client";
 import React, { useState } from "react";
 import CartItems from "./../components/checkout/cartItems";
 import OrderInformation from "./../components/checkout/orderInformation";
 import { useCartStore } from "@/app/hooks/useCartHooks";
 import { CustomerInfo } from "@/app/types";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const CheckoutPage = () => {
   const { push } = useRouter();

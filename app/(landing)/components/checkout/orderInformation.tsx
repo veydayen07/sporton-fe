@@ -20,6 +20,7 @@ const OrderInformation = ({
       <div className="flex flex-col gap-5 px-6.25 pb-13 pt-4">
         <InputGroup
           label="Full Name"
+          name="customerName"
           type="text"
           placeholder="Type your full name"
           value={formData.customerName ?? ""}
@@ -27,6 +28,7 @@ const OrderInformation = ({
         />
         <InputGroup
           label="Whatsap Number"
+          name="customerContact"
           type="tel"
           placeholder="+62xxxx"
           value={formData.customerContact ?? ""}
@@ -35,7 +37,7 @@ const OrderInformation = ({
         <InputGroup label="Shipping address">
           <textarea
             className="bg-[#F0F0F0D1] px-4 py-2.5 outline-none focus:border focus:border-gray-400 text-sm"
-            name=""
+            name="customerAddress"
             rows={7}
             id=""
             placeholder="Example Street, 18, West Jakarta, Indonesia, 66521"
