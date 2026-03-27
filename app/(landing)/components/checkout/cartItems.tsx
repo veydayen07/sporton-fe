@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/useCartHooks";
 import { BASE_API_URL } from "@/app/lib/api";
 
-const CartItems = () => {
+const CartItems = ({ handlePayment }: { handlePayment: () => void }) => {
   const { items: cartList, removeItem } = useCartStore();
   const { push } = useRouter();
   return (
@@ -66,7 +66,7 @@ const CartItems = () => {
           <Button
             variant="dark"
             className="w-full"
-            onClick={() => push("/payment")}
+            onClick={() => handlePayment()}
           >
             Proceed to Payment{" "}
             <FiCreditCard width={22} height={22} className="text-white" />

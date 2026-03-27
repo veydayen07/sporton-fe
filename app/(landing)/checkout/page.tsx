@@ -5,10 +5,11 @@ import OrderInformation from "./../components/checkout/orderInformation";
 import { useCartStore } from "@/app/hooks/useCartHooks";
 import { CustomerInfo } from "@/app/types";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
   const { push } = useRouter();
-  const [showWarningToast, setShowWarningToast] = useState<boolean>(false);
+  // const [showWarningToast, setShowWarningToast] = useState<boolean>(false);
   const [formData, setFormData] = useState<CustomerInfo>({
     customerAddress: "",
     customerContact: null,
@@ -21,7 +22,9 @@ const CheckoutPage = () => {
       !formData.customerContact ||
       !formData.customerName
     ) {
-      setShowWarningToast(true);
+      // setShowWarningToast(true);
+      toast.warning("Complete your information");
+      // alert("HIiii");
       return;
     }
 
@@ -36,7 +39,7 @@ const CheckoutPage = () => {
         </h1>
         <div className="grid grid-cols-2 gap-15 ">
           <OrderInformation formData={formData} setFormData={setFormData} />
-          <CartItems />
+          <CartItems handlePayment={() => handlePayment()} />
         </div>
       </div>
     </div>

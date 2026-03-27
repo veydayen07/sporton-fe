@@ -33,7 +33,7 @@ const ProductDetail = async ({ params }: { params: { id: string } }) => {
         <p className="text-primary text-4xl font-semibold leading-normal mb-12">
           {priceFormatter(product.price)}
         </p>
-        <ProductActions p stock={product.stock} />
+        <ProductActions product={product} stock={product.stock} />
       </div>
     </div>
   );

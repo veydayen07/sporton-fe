@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { Product } from "@/app/types";
+import { useCartStore } from "@/app/hooks/useCartHooks";
 
 const ProductActions = ({
   stock,
@@ -19,6 +20,11 @@ const ProductActions = ({
 }) => {
   const { push } = useRouter();
   const [qty, setQty] = useState<number>(1);
+  const { addItem } = useCartStore();
+  const handleCheckout = () => {
+    push("/checkout");
+    addItem(product, qty);
+  };
   return (
     <div className="flex gap-6  ">
       <div className="min-w-20.5 border border-[#A0A0A0] w-fit flex">
@@ -43,6 +49,7 @@ const ProductActions = ({
       <Button
         variant="primary"
         className="flex gap-2 w-full items-center justify-center"
+        onClick={() => addItem(product, qty)}
       >
         <i>
           <FiShoppingBag size={24} strokeWidth={2} />
@@ -52,7 +59,7 @@ const ProductActions = ({
       <Button
         variant="dark"
         className="flex gap-3 w-full font-medium text-base items-center justify-center"
-        onClick={() => push("/checkout")}
+        onClick={() => handleCheckout()}
       >
         <span className="">Checkout Now</span>
         <i>

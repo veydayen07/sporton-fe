@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import CardWithHeader from "./../ui/cardWithHeader";
 import FileUploads from "../ui/FileUploads";
 import { priceFormatter } from "@/app/utils/price-formatter";
@@ -8,18 +8,59 @@ import Button from "../ui/button";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/useCartHooks";
+import { transactionCheckout } from "@/app/services/transaction.service";
 
 type TPaymentStep = {
   className?: string;
 };
 
 const PaymentStep = ({ className }: TPaymentStep) => {
-  const { items } = useCartStore();
+  const { customerInfo, items, reset } = useCartStore();
+  const { push } = useRouter();
+  const [file, setFile] = useState<File | null>();
   const totalPrice = items.reduce(
     (total, item) => total + item.qty * item.price,
     0,
   );
-  const { push } = useRouter();
+
+  const handleConfirmPayment = async () => {
+    if (!file) {
+      alert("Please upload your payment receipt!");
+      return;
+    }
+
+    if (!customerInfo) {
+      alert("Customer information is missing, please return to checkout");
+      push("/checkout");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("customerName", customerInfo.customerName);
+      formData.append(
+        "customerContact",
+        customerInfo.customerContact!.toString(),
+      );
+      formData.append("customerAddress", customerInfo.customerAddress);
+      formData.append("image", file);
+      formData.append(
+        "purchasedItems",
+        JSON.stringify(
+          items.map((item) => ({ productId: item._id, qty: item.qty })),
+        ),
+      );
+      formData.append("totalPayment", totalPrice!.toString());
+
+      const res = await transactionCheckout(formData);
+
+      alert("Transaction created successfully!");
+      reset();
+      push(`/order-status/${res._id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className={`${className}`}>
       <CardWithHeader header="Payment Step">
@@ -45,7 +86,7 @@ const PaymentStep = ({ className }: TPaymentStep) => {
             </li>
           </ol>
           <div className="px-4">
-            <FileUploads />
+            <FileUploads onFileSelect={setFile} />
           </div>
         </div>
         <div className="flex flex-col gap-4">
@@ -59,7 +100,7 @@ const PaymentStep = ({ className }: TPaymentStep) => {
             <Button
               className="text-base font-medium flex items-center gap-3 w-full"
               variant="dark"
-              onClick={() => push("/order-status/12222")}
+              onClick={handleConfirmPayment}
             >
               <FiCheckCircle size={20} strokeWidth={2} /> Upload Receipt &
               Confirm

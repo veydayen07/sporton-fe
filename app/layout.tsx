@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import HeaderLayout from "./(landing)/components/layouts/HeaderLayouts";
 import Footer from "./(landing)/components/layouts/Footer";
+import { ToastContainer } from "react-toastify";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -27,6 +28,7 @@ export default function RootLayout({
         className={`${poppins.variable} antialiased min-h-screen flex flex-col`}
       >
         <HeaderLayout />
+        <ToastContainer />
         <main className="flex-1 ">{children}</main>
         <Footer />
       </body>

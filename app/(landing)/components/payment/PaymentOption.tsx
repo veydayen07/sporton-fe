@@ -1,6 +1,7 @@
 import React from "react";
 import CardWithHeader from "../ui/cardWithHeader";
 import { FiCreditCard } from "react-icons/fi";
+import { getAllBanks } from "@/app/services/bank.service";
 
 type TPaymentOption = {
   className?: string;
@@ -25,12 +26,13 @@ const paymentList: TPayment[] = [
   },
 ];
 
-const PaymentOption = ({ className }: TPaymentOption) => {
+const PaymentOption = async ({ className }: TPaymentOption) => {
+  const banks = await getAllBanks();
   return (
     <div className={`${className}`}>
       <CardWithHeader header="Payment Option" className="h-full">
         <div className="border border-gray-100 ">
-          {paymentList.map((payment, index) => (
+          {banks.map((payment, index) => (
             <div
               key={index}
               className="flex justify-between px-6.5 py-7 border-b border-gray-100"
@@ -45,11 +47,14 @@ const PaymentOption = ({ className }: TPaymentOption) => {
                 </div>
                 <div className="flex flex-col justify-center gap-0.5">
                   <span className="font-bold text-base ">
-                    {payment.bank_name}
+                    {payment.bankName}
                   </span>
                   <span className="font-regular text-sm ">
-                    {payment.account_number}
+                    {payment.accountNumber}
                   </span>
+                  <div className="text-sm opacity-70">
+                    {payment.accountName}
+                  </div>
                 </div>
               </div>
               <span className="px-2 py-0.75 text-xs self-center">
