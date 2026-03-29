@@ -70,7 +70,7 @@ const TransactionManagement = () => {
       </div>
       <TransactionTable
         transactions={transactions}
-        onViewDetails={() => handleViewDetails}
+        onViewDetails={handleViewDetails}
       />
       <TransactionModal
         transaction={selectedTransaction}
