@@ -8,7 +8,7 @@ import { FiCreditCard, FiTrash2 } from "react-icons/fi";
 import Button from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/useCartHooks";
-import { BASE_API_URL } from "@/app/lib/api";
+import { BASE_API_URL, getImageUrl } from "@/app/lib/api";
 
 const CartItems = ({ handlePayment }: { handlePayment: () => void }) => {
   const { items: cartList, removeItem } = useCartStore();
@@ -27,7 +27,7 @@ const CartItems = ({ handlePayment }: { handlePayment: () => void }) => {
                   width={63}
                   height={63}
                   alt={item.name}
-                  src={`${BASE_API_URL}${item.imageUrl}`}
+                  src={getImageUrl(item.imageUrl)}
                   className="object-contain aspect-square"
                 />
               </div>

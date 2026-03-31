@@ -6,7 +6,7 @@ import { priceFormatter } from "@/app/utils/price-formatter";
 import Button from "./button";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/useCartHooks";
-import { BASE_API_URL } from "@/app/lib/api";
+import { BASE_API_URL, getImageUrl } from "@/app/lib/api";
 
 const CartPopUp = () => {
   const { push } = useRouter();
@@ -30,7 +30,7 @@ const CartPopUp = () => {
                     width={63}
                     height={63}
                     alt={item.name}
-                    src={`${BASE_API_URL}${item.imageUrl}`}
+                    src={getImageUrl(item.imageUrl)}
                     className="object-contain aspect-square"
                   />
                 </div>

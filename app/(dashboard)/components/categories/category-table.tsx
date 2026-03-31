@@ -1,4 +1,4 @@
-import { BASE_API_URL } from "@/app/lib/api";
+import { BASE_API_URL, getImageUrl } from "@/app/lib/api";
 import { Category } from "@/app/types";
 import Image from "next/image";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
@@ -34,7 +34,7 @@ const CategoryTable = ({
                 <div className="flex gap-2 items-center">
                   <div className="aspect-square bg-gray-100 rounded-md">
                     <Image
-                      src={`${BASE_API_URL}${data.imageUrl}`}
+                      src={getImageUrl(data.imageUrl)}
                       width={52}
                       height={52}
                       alt={data.name}
